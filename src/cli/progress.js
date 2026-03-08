@@ -59,8 +59,8 @@ const progress = () => {
     process.stdout.write(`\r${progressBar}`);
 
     if (ratio >= 1) {
-      clearInterval(timer);
       process.stdout.write('\nDone!\n');
+      clearInterval(timer);
     }
   }, interval);
 };

@@ -31,7 +31,7 @@ const snapshot = async () => {
         path: relPath,
         type: 'file',
         size: fileOrDirStat.size,
-        content: await readFile(fullPath, { encoding: 'base64' }),
+        content: await readFile(fullPath, 'base64'),
       });
     }
   }
