@@ -10,9 +10,11 @@ const merge = async () => {
   const workspacePath = path.join(absoluteRootPath, 'workspace');
   const partsPath = path.join(workspacePath, 'parts');
 
+  const throwError = () => { throw new Error('FS operation failed') };
+
   const partsStat = await stat(partsPath).catch(() => ''); // catching to avoid Unhandled rejection
   if (!partsStat || !partsStat.isDirectory()) {
-    throw new Error('FS operation failed');
+    throwError();
   }
 
   const argv = process.argv;
@@ -28,7 +30,7 @@ const merge = async () => {
       : [];
 
     if (!splitFilePathsArray.length) {
-      throw new Error('FS operation failed');
+      throwError();
     }
 
     filesToMerge = splitFilePathsArray;
@@ -37,7 +39,7 @@ const merge = async () => {
     const txtFiles = relPaths.filter(filePath => path.extname(filePath) === '.txt');
 
     if (!txtFiles.length) {
-      throw new Error('FS operation failed');
+      throwError();
     }
 
     filesToMerge = txtFiles.sort((a, b) => a.localeCompare(b));
@@ -50,7 +52,7 @@ const merge = async () => {
     const fileStat = await stat(fullPath).catch(() => ''); // catching to avoid Unhandled rejection
 
     if (!fileStat || !fileStat.isFile()) {
-      throw new Error('FS operation failed');
+      throwError();
     }
 
     const content = await readFile(fullPath, 'utf8');
