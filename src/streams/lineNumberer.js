@@ -14,7 +14,7 @@ const lineNumberer = () => {
 
       // iterating over all lines:
       lines.forEach(line => {
-        this.push(`\n${lineNumber++} | ${line}\n`);
+        this.push(`${lineNumber++} | ${line}\n`);
       });
 
       callback();
