@@ -22,15 +22,15 @@ const snapshot = async () => {
   // fill entries array with files and directories relative paths and info:
   for (const relPath of relPaths) {
     const fullPath = path.join(workspacePath, relPath);
-    const fileOrDirInfo = await stat(fullPath);
+    const fileOrDirStat = await stat(fullPath);
 
-    if (fileOrDirInfo.isDirectory()) {
+    if (fileOrDirStat.isDirectory()) {
       entries.push({ path: relPath, type: 'directory' });
     } else {
       entries.push({
         path: relPath,
         type: 'file',
-        size: fileOrDirInfo.size,
+        size: fileOrDirStat.size,
         content: await readFile(fullPath, { encoding: 'base64' }),
       });
     }
