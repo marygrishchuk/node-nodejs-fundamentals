@@ -30,9 +30,10 @@ const progress = () => {
     if (matchDataArray) {
       const hex = matchDataArray[1];
       // parsing hex to rgb:
-      const r = parseInt(hex.slice(0, 2), 16);
-      const g = parseInt(hex.slice(2, 4), 16);
-      const b = parseInt(hex.slice(4, 6), 16);
+      const getRgbFromHex = (hexStart, hexEnd) => parseInt(hex.slice(hexStart, hexEnd), 16);
+      const r = getRgbFromHex(0, 2);
+      const g = getRgbFromHex(2, 4);
+      const b = getRgbFromHex(4, 6);
       foregroundColorEscape = `\x1b[38;2;${r};${g};${b}m`;
       resetColorEscape = '\x1b[0m';
     }
